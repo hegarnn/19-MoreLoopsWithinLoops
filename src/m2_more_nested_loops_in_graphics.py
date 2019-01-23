@@ -4,8 +4,8 @@ in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Aaron Wilkin, their colleagues,
-         and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Nasser Hegar.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -52,7 +52,30 @@ def draw_upside_down_wall(rectangle, n, window):
     # -------------------------------------------------------------------------
     # TODO: 2. Implement and test this function.
     #     Some tests are already written for you (above).
-    # -------------------------------------------------------------------------
+    #
+    win = window
+    rec = rectangle
+
+    x = rectangle.get_width()/2
+    #y -= rectangle.get_height()
+
+    rec2 = rg.Rectangle(rg.Point(rec.get_upper_right_corner().x, rec.get_upper_right_corner().y),
+                        rg.Point(rec.get_lower_right_corner().x-(rec.get_width()), rec.get_lower_right_corner().y))
+
+    for j in range(n-1):
+        #rec.attach_to(win)
+
+        rec = rg.Rectangle(
+            rg.Point(rec.get_upper_left_corner().x - x, rec.get_upper_left_corner().y - (rectangle.get_height())),
+            rg.Point(rec.get_lower_right_corner().x - x, rec.get_lower_right_corner().y - (rectangle.get_height())))
+
+        for k in range(j):
+            rec2.attach_to(win)
+            rec2 = rg.Rectangle(rg.Point(rec.get_upper_right_corner().x, rec.get_upper_right_corner().y),
+                                rg.Point(rec.get_lower_right_corner().x - (rec.get_width()), rec.get_lower_right_corner().y))
+
+    win.render()
+
 
 
 # -----------------------------------------------------------------------------
